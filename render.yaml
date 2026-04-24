@@ -1,0 +1,12 @@
+# Render Deployment Configuration
+# Place this file in root directory for Render deployment
+
+# Build command
+build_command: "pip install -r backend/requirements.txt"
+
+# Start command
+start_command: "cd backend && uvicorn main:app --host 0.0.0.0 --port $PORT"
+
+# Environment variables to add in Render dashboard:
+# ALLOWED_ORIGINS: *.onrender.com,yourdomain.com
+# DEBUG: False

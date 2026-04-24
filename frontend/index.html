@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Python Compiler</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="logo">
+                <div class="logo-icon">⟨⟩</div>
+                <h1>PyCompile</h1>
+            </div>
+            <div class="menu">
+                <button class="menu-btn active" onclick="switchTab('editor')">
+                    <span class="menu-icon">✎</span> Editor
+                </button>
+                <button class="menu-btn" onclick="switchTab('history')">
+                    <span class="menu-icon">⏱</span> History
+                </button>
+                <button class="menu-btn" onclick="switchTab('settings')">
+                    <span class="menu-icon">⚙</span> Settings
+                </button>
+            </div>
+            <div class="footer-menu">
+                <button class="menu-btn" onclick="toggleTheme()">
+                    <span class="menu-icon" id="theme-icon">◐</span> Theme
+                </button>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main">
+            <!-- Header -->
+            <div class="header">
+                <div class="title">
+                    <h2>Python Code Executor</h2>
+                    <p>Write, Run & Debug Python Code Online</p>
+                </div>
+                <div class="controls">
+                    <button class="btn btn-reset" onclick="resetCode()">↻ Reset</button>
+                    <button class="btn btn-run" onclick="runCode()">▶ Execute Code</button>
+                </div>
+            </div>
+
+            <!-- Tab Content -->
+            <div class="content">
+                <!-- Editor Tab -->
+                <div id="editor-tab" class="tab active">
+                    <div class="editor-container">
+                        <textarea id="code-input" class="code-editor" placeholder="# Write your Python code here...
+# Example:
+print('Hello, World!')"></textarea>
+                    </div>
+                    
+                    <div class="input-container">
+                        <div class="input-header">
+                            <h3>⌨ User Input</h3>
+                            <small>(One input per line)</small>
+                        </div>
+                        <textarea id="user-input" class="user-input" placeholder="Enter input for your program here...\nEach line will be read separately"></textarea>
+                    </div>
+                    
+                    <div class="output-container">
+                        <div class="output-header">
+                            <h3>⊗ Output Console</h3>
+                            <button class="btn-clear" onclick="clearOutput()">×</button>
+                        </div>
+                        <div id="output" class="output"></div>
+                    </div>
+                </div>
+
+                <!-- History Tab -->
+                <div id="history-tab" class="tab">
+                    <div class="history-container">
+                        <h3>Execution History</h3>
+                        <div id="history-list" class="history-list"></div>
+                    </div>
+                </div>
+
+                <!-- Settings Tab -->
+                <div id="settings-tab" class="tab">
+                    <div class="settings-container">
+                        <div class="setting-item">
+                            <h3>Font Size</h3>
+                            <input type="range" id="font-size" min="12" max="24" value="14" onchange="changeFontSize(this.value)">
+                            <span id="font-size-value">14px</span>
+                        </div>
+                        <div class="setting-item">
+                            <h3>Line Wrapping</h3>
+                            <label class="toggle">
+                                <input type="checkbox" id="wrap-toggle" onchange="toggleWrap(this.checked)">
+                                <span>Enable Word Wrap</span>
+                            </label>
+                        </div>
+                        <div class="setting-item">
+                            <h3>Execution Timeout</h3>
+                            <select id="timeout" onchange="setTimout(this.value)">
+                                <option value="5">5 seconds</option>
+                                <option value="10" selected>10 seconds</option>
+                                <option value="30">30 seconds</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Spinner -->
+    <div id="loader" class="loader hidden">
+        <div class="spinner"></div>
+        <p>Executing...</p>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
