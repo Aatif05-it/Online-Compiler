@@ -214,4 +214,4 @@ For issues or questions, create an issue in the repository.
 
 ---
 
-**Made with ❤️ by Your Name** | PyCompile v1.0.0
+**Made with ❤️ by Your Khan Aatif** | PyCompile v1.0.0

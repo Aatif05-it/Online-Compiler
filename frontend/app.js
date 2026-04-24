@@ -1,5 +1,5 @@
 // Configuration
-const API_URL = `${window.location.protocol}//${window.location.hostname}:8000/api`;
+const API_URL = "https://compiler-backend-ekfy.onrender.com";
 let executionHistory = [];
 let theme = localStorage.getItem('theme') || 'dark';
 let timeout = 10;
