@@ -1,12 +1,15 @@
-# Render Deployment Configuration
-# Place this file in root directory for Render deployment
+services:
+  - type: web
+    name: compiler-backend
+    runtime: python
+    plan: free
+    buildCommand: pip install -r backend/requirements.txt
+    startCommand: cd backend && uvicorn main:app --host 0.0.0.0 --port $PORT
 
-# Build command
-build_command: "pip install -r backend/requirements.txt"
-
-# Start command
-start_command: "cd backend && uvicorn main:app --host 0.0.0.0 --port $PORT"
-
-# Environment variables to add in Render dashboard:
-# ALLOWED_ORIGINS: *.onrender.com,yourdomain.com
-# DEBUG: False
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.10
+      - key: DEBUG
+        value: False
+      - key: ALLOWED_ORIGINS
+        value: "*"
