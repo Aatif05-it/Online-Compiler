@@ -152,6 +152,7 @@ async function runCode() {
         addHistoryEntry(code, false, error.message);
     } finally {
         loader.classList.add('hidden');
+        scrollOutputIntoView();
     }
 }
 
@@ -163,6 +164,18 @@ function addOutput(text, type = 'info') {
     line.textContent = text;
     outputDiv.appendChild(line);
     outputDiv.scrollTop = outputDiv.scrollHeight;
+    scrollOutputIntoView();
+}
+
+function scrollOutputIntoView() {
+    const outputContainer = document.querySelector('.output-container');
+    if (!outputContainer) {
+        return;
+    }
+
+    if (window.matchMedia('(max-width: 860px)').matches) {
+        outputContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
 }
 
 // Clear Output
