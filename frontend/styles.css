@@ -36,6 +36,7 @@ body {
     color: var(--text-primary);
     transition: background-color 0.3s, color 0.3s;
     overflow-y: auto;
+    padding-bottom: env(safe-area-inset-bottom);
 }
 
 .container {
@@ -846,19 +847,20 @@ body {
     }
 
     .editor-container {
-        min-height: 38dvh;
+        min-height: 30dvh;
         border-bottom: 1px solid var(--border);
     }
 
     .input-container {
-        min-height: 24dvh;
+        min-height: 18dvh;
         border-top: none;
         border-bottom: 1px solid var(--border);
         padding: 12px;
     }
 
     .output-container {
-        min-height: 28dvh;
+        min-height: 40dvh;
+        scroll-margin-bottom: 16px;
     }
 
     .code-editor,
@@ -945,15 +947,16 @@ body {
     }
 
     .editor-container {
-        min-height: 36dvh;
+        min-height: 28dvh;
     }
 
     .input-container {
-        min-height: 22dvh;
+        min-height: 18dvh;
     }
 
     .output-container {
-        min-height: 30dvh;
+        min-height: 44dvh;
+        scroll-margin-bottom: 20px;
     }
 
     .output-header,
