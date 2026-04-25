@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
     loadExecutionHistory();
     setupCodeEditor();
     setKeybindings();
+    setupScrollTopButton();
 });
 
 // Theme Toggle
@@ -176,6 +177,25 @@ function scrollOutputIntoView() {
     if (window.matchMedia('(max-width: 860px)').matches) {
         outputContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
+}
+
+function setupScrollTopButton() {
+    const scrollTopButton = document.getElementById('scroll-top-btn');
+    if (!scrollTopButton) {
+        return;
+    }
+
+    const updateVisibility = () => {
+        const shouldShow = window.scrollY > 180;
+        scrollTopButton.classList.toggle('hidden', !shouldShow);
+    };
+
+    window.addEventListener('scroll', updateVisibility, { passive: true });
+    updateVisibility();
+}
+
+function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 // Clear Output

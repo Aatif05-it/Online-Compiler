@@ -687,6 +687,39 @@ body {
     font-size: 16px;
 }
 
+.scroll-top-btn {
+    position: fixed;
+    right: 18px;
+    bottom: 18px;
+    width: 46px;
+    height: 46px;
+    border: 1px solid rgba(154, 160, 166, 0.4);
+    border-radius: 999px;
+    background: linear-gradient(180deg, rgba(33, 38, 45, 0.96), rgba(22, 27, 34, 0.96));
+    color: var(--text-primary);
+    font-size: 20px;
+    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.28);
+    z-index: 900;
+    transition: transform 0.2s ease, opacity 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+}
+
+.scroll-top-btn:hover {
+    transform: translateY(-2px);
+    border-color: rgba(154, 160, 166, 0.7);
+    background: linear-gradient(180deg, rgba(45, 51, 59, 0.98), rgba(28, 33, 40, 0.98));
+}
+
+.scroll-top-btn.hidden {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(8px);
+}
+
 /* Scrollbar Styling */
 ::-webkit-scrollbar {
     width: 11px;
@@ -736,6 +769,14 @@ body {
 
     ::-webkit-scrollbar-thumb:hover {
         background: linear-gradient(180deg, #e2e6eb, #c1c7cf);
+    }
+
+    .scroll-top-btn {
+        right: 12px;
+        bottom: 12px;
+        width: 42px;
+        height: 42px;
+        font-size: 18px;
     }
 }
 
