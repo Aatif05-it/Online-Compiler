@@ -252,6 +252,21 @@ function deleteHistoryEntry(event, index) {
     updateHistoryUI();
 }
 
+function clearAllHistory() {
+    if (!executionHistory.length) {
+        updateHistoryUI();
+        return;
+    }
+
+    if (!confirm('Delete all execution history?')) {
+        return;
+    }
+
+    executionHistory = [];
+    localStorage.removeItem('executionHistory');
+    updateHistoryUI();
+}
+
 function loadFromHistory(index) {
     const entry = executionHistory[index];
     document.getElementById('code-input').value = entry.code;

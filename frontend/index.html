@@ -77,7 +77,10 @@ print('Hello, World!')"></textarea>
                 <!-- History Tab -->
                 <div id="history-tab" class="tab">
                     <div class="history-container">
-                        <h3>Execution History</h3>
+                        <div class="history-header">
+                            <h3>Execution History</h3>
+                            <button class="btn btn-history-clear" onclick="clearAllHistory()">Clear All</button>
+                        </div>
                         <div id="history-list" class="history-list"></div>
                     </div>
                 </div>
