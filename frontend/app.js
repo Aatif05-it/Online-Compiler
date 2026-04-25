@@ -1,5 +1,11 @@
 // Configuration
-const API_URL = "https://compiler-backend-ekfy.onrender.com";
+const runtimeApiUrl =
+    window.RUNTIME_CONFIG && typeof window.RUNTIME_CONFIG.API_URL === 'string'
+        ? window.RUNTIME_CONFIG.API_URL.trim().replace(/\/$/, '')
+        : '';
+
+const API_URL = runtimeApiUrl ||
+    (window.location.hostname === 'localhost' ? 'http://localhost:8000/api' : '');
 let executionHistory = [];
 let theme = localStorage.getItem('theme') || 'dark';
 let timeout = 10;
@@ -96,6 +102,11 @@ async function runCode() {
     
     if (!code.trim()) {
         addOutput('Please write some code first!', 'error');
+        return;
+    }
+
+    if (!API_URL) {
+        addOutput('API URL is not configured. Set window.RUNTIME_CONFIG.API_URL in frontend/config.js', 'error');
         return;
     }
 

@@ -30,7 +30,7 @@ git push origin main
    - **Name**: pycompile-backend
    - **Environment**: Python
    - **Build Command**: `pip install -r backend/requirements.txt`
-   - **Start Command**: `cd backend && uvicorn main:app --host 0.0.0.0`
+   - **Start Command**: `cd backend && uvicorn main:app --host 0.0.0.0 --port $PORT`
 4. Add Environment Variables:
    ```
    ALLOWED_ORIGINS=*.onrender.com
@@ -50,10 +50,10 @@ git push origin main
 
 ### Step 5: Connect Frontend to Backend
 
-1. Get your backend URL from Render dashboard (e.g., https://pycompile-backend.onrender.com)
-2. Edit `frontend/app.js`
-3. Change: `const API_URL = 'http://localhost:8000/api'`
-4. To: `const API_URL = 'https://pycompile-backend.onrender.com/api'`
+1. Get your backend URL from Render dashboard (e.g., https://your-backend-name.onrender.com)
+2. Edit `frontend/config.js`
+3. Change `API_URL` from localhost
+4. To: `API_URL = 'https://your-backend-name.onrender.com/api'`
 5. Push changes - frontend will auto-redeploy
 
 **✅ Done! Your app is live at the frontend URL**

@@ -1,6 +1,6 @@
-# PyCompile - Advanced Python Compiler
+# Online Compiler - Advanced Python Compiler
 
-🐍 **PyCompile** is a modern, web-based Python code executor with a beautiful UI and powerful backend.
+🐍 **Online Compiler** is a modern, web-based Python code executor with a beautiful UI and powerful backend.
 
 ## 🌟 Features
 
@@ -50,7 +50,7 @@ Frontend runs at: `http://localhost:3000`
 
 ### Option 1: Deploy to Render (Recommended - Free)
 
-1. **Push to GitHub**
+1. **Fork or push this project to your own GitHub repository**
    ```bash
    git init
    git add .
@@ -63,15 +63,16 @@ Frontend runs at: `http://localhost:3000`
 3. **Deploy Backend:**
    - Click "New +" → "Web Service"
    - Connect your GitHub repo
-   - Build Command: `pip install -r requirements.txt`
-   - Start Command: `uvicorn backend.main:app --host 0.0.0.0 --port $PORT`
-   - Environment: Add `ALLOWED_ORIGINS=*.onrender.com`
+   - Build Command: `pip install -r backend/requirements.txt`
+   - Start Command: `cd backend && uvicorn main:app --host 0.0.0.0 --port $PORT`
+   - Environment: Set `DEBUG=False`
+   - Environment: Set `ALLOWED_ORIGINS=https://your-frontend-name.onrender.com`
 
 4. **Deploy Frontend:**
    - Click "New +" → "Static Site"
    - Connect your GitHub repo
    - Publish directory: `frontend`
-   - Update `API_URL` in `frontend/app.js` to your Render backend URL
+   - Update `frontend/config.js` and set `API_URL` to your backend URL, for example: `https://your-backend-name.onrender.com/api`
 
 ### Option 2: Deploy to Railway (Free Tier Available)
 
@@ -134,9 +135,11 @@ GET /api/python-version
 ## 🎨 Customization
 
 ### Change API URL
-In `frontend/app.js`, update:
+In `frontend/config.js`, update:
 ```javascript
-const API_URL = 'https://your-backend-url.com/api';
+window.RUNTIME_CONFIG = {
+   API_URL: 'https://your-backend-url.com/api'
+};
 ```
 
 ### Change Theme Colors
