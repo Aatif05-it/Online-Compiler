@@ -35,12 +35,14 @@ body {
     background-color: var(--primary-bg);
     color: var(--text-primary);
     transition: background-color 0.3s, color 0.3s;
+    overflow-y: auto;
 }
 
 .container {
     display: flex;
-    height: 100vh;
-    overflow: hidden;
+    min-height: 100dvh;
+    height: auto;
+    overflow-y: auto;
 }
 
 body {
@@ -139,7 +141,8 @@ body {
     flex: 1;
     display: flex;
     flex-direction: column;
-    overflow: hidden;
+    min-height: 100dvh;
+    overflow-y: auto;
 }
 
 .header {
@@ -229,7 +232,8 @@ body {
 /* Content Tabs */
 .content {
     flex: 1;
-    overflow: auto;
+    min-height: 0;
+    overflow-y: auto;
 }
 
 .tab {
@@ -747,7 +751,9 @@ body {
 @media (max-width: 860px) {
     .container {
         flex-direction: column;
-        height: 100dvh;
+        min-height: 100dvh;
+        height: auto;
+        overflow-y: auto;
     }
 
     .sidebar {
@@ -793,6 +799,8 @@ body {
 
     .main {
         min-width: 0;
+        min-height: auto;
+        overflow-y: visible;
     }
 
     .header {
@@ -819,6 +827,7 @@ body {
 
     .content {
         overflow: visible;
+        min-height: 0;
     }
 
     #editor-tab {
@@ -891,7 +900,9 @@ body {
 
 @media (max-width: 480px) {
     .container {
-        height: 100dvh;
+        min-height: 100dvh;
+        height: auto;
+        overflow-y: auto;
     }
 
     .sidebar {
