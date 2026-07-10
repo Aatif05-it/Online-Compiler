@@ -74,6 +74,24 @@ function setKeybindings() {
             e.target.value = e.target.value.substring(0, start) + '\t' + e.target.value.substring(end);
             e.target.selectionStart = e.target.selectionEnd = start + 1;
         }
+
+        // Enter key with simple Python-style auto-indent
+        if (e.key === 'Enter') {
+            e.preventDefault();
+
+            const start = e.target.selectionStart;
+            const end = e.target.selectionEnd;
+            const value = e.target.value;
+            const lineStart = value.lastIndexOf('\n', start - 1) + 1;
+            const currentLine = value.slice(lineStart, start);
+            const leadingWhitespace = currentLine.match(/^\s*/)?.[0] || '';
+            const extraIndent = /:\s*$/.test(currentLine.trimEnd()) ? '    ' : '';
+            const nextIndent = leadingWhitespace + extraIndent;
+            const replacement = `\n${nextIndent}`;
+
+            e.target.value = value.substring(0, start) + replacement + value.substring(end);
+            e.target.selectionStart = e.target.selectionEnd = start + replacement.length;
+        }
         
         // Ctrl+Enter to run
         if (e.ctrlKey && e.key === 'Enter') {
@@ -92,6 +110,29 @@ function countProvidedInputLines(userInput) {
         return 0;
     }
     return userInput.trimEnd().split(/\r?\n/).length;
+}
+
+function formatPythonError(errorText, code) {
+    const message = (errorText || 'Execution failed').trim();
+    const errorTypeMatch = message.match(/(IndentationError|SyntaxError|TabError|NameError|TypeError|ValueError|Exception)\b/);
+    const errorType = errorTypeMatch ? errorTypeMatch[1] : 'Python Error';
+    const lineMatch = message.match(/File "<string>", line (\d+)/);
+    const lineNumber = lineMatch ? parseInt(lineMatch[1], 10) : null;
+
+    if (!lineNumber || !code) {
+        return `${errorType}\n${message}`;
+    }
+
+    const codeLines = code.split(/\r?\n/);
+    const sourceLine = codeLines[lineNumber - 1] || '';
+    const isIndentationIssue = /IndentationError|expected an indented block|unexpected indent|unindent does not match/i.test(message);
+
+    return [
+        `${isIndentationIssue ? 'Indentation Error' : errorType} on line ${lineNumber}`,
+        sourceLine ? `  ${sourceLine}` : '',
+        `  ${message}`,
+        isIndentationIssue ? '  Check the spacing or tabs on this line and the line above it.' : ''
+    ].filter(Boolean).join('\n');
 }
 
 // Run Code
@@ -145,7 +186,7 @@ async function runCode() {
             }
             addHistoryEntry(code, true, data.output);
         } else {
-            addOutput('Actual Python Error:\n' + (data.error || 'Execution failed'), 'error');
+            addOutput(formatPythonError(data.error, code), 'error');
             addHistoryEntry(code, false, data.error);
         }
     } catch (error) {
