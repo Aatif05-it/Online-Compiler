@@ -11,7 +11,7 @@ services:
       - key: DEBUG
         value: False
       - key: ALLOWED_ORIGINS
-        value: https://your-frontend-name.onrender.com
+        value: https://compiler-frontend.onrender.com
 
   - type: web
     name: compiler-frontend
